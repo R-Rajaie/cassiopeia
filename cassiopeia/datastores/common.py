@@ -252,13 +252,8 @@ else:  # Use requests
             ).upper()
 
             # Decode to text if a charset is included
-            match = re.search("CHARSET=(\S+)", content_type)
-            if match:
-                # Load JSON if necessary
-                if "APPLICATION/JSON" in content_type:
-                    body = r.json()
-                else:
-                    body = r.content.decode("utf-8")
+            if "APPLICATION/JSON" in content_type:
+                body = r.json()
             elif "IMAGE/" in content_type:
                 body = r.content
             else:
